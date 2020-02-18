@@ -8,8 +8,10 @@
 
 #include "Borrower.hpp"
 #include "stdlib.h"
+#include "tgmath.h"
+#include <iostream>
 
-Borrower :: Borrower (int annualPercentageRateOfCharge, int amountBorrowed, int duration) {
+Borrower :: Borrower (double annualPercentageRateOfCharge, int amountBorrowed, int duration) {
     
     this -> annualPercentageRateOfCharge = annualPercentageRateOfCharge;
     this -> amountBorrowed = amountBorrowed;
@@ -17,13 +19,33 @@ Borrower :: Borrower (int annualPercentageRateOfCharge, int amountBorrowed, int 
     
 }
 
-int Borrower :: getMonthlyPayment() const  {
+Borrower :: Borrower (double annualPercentageRateOfCharge, double monthlyPayment, int duration) {
+    
+    this -> annualPercentageRateOfCharge = annualPercentageRateOfCharge;
+    this -> monthlyPayment = monthlyPayment;
+    this -> duration = duration;
+    
+}
+
+double Borrower :: calculateMonthlyPayments () {
+    
+    return ((amountBorrowed * annualPercentageRateOfCharge / 1200) / (1 - pow((1 + annualPercentageRateOfCharge / 1200),(duration * (-1)))));
+    
+}
+
+double Borrower :: calculateBorrowingCapacity() {
+    
+    return ((monthlyPayment * (1 - pow((1 + annualPercentageRateOfCharge / 1200),(duration * (-1))))) / (annualPercentageRateOfCharge / 1200));
+    
+}
+
+double Borrower :: getMonthlyPayment() const  {
     
     return monthlyPayment;
     
 }
 
-int Borrower :: getAnnualPercentageRateOfCharge() const {
+double Borrower :: getAnnualPercentageRateOfCharge() const {
     
     return annualPercentageRateOfCharge;
     
@@ -41,13 +63,13 @@ int Borrower :: getDuration() const {
     
 }
 
-void Borrower :: setMonthlyPayments(int monthlyPayment) {
+void Borrower :: setMonthlyPayments(double monthlyPayment) {
     
     this -> monthlyPayment = monthlyPayment;
     
 }
 
-void Borrower :: setAnnualPercentageRateOfCharge(int annualPercentageRateOfCharge) {
+void Borrower :: setAnnualPercentageRateOfCharge(double annualPercentageRateOfCharge) {
     
     this -> annualPercentageRateOfCharge = annualPercentageRateOfCharge;
     

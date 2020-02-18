@@ -17,22 +17,26 @@ class Borrower {
     
 public:
     
-    Borrower(int annualPercentageRateOfCharge, int amountBorrowed, int duration);
-    
-    int getMonthlyPayment() const ;
-    int getAnnualPercentageRateOfCharge() const;
+    Borrower(double annualPercentageRateOfCharge, int amountBorrowed, int duration);
+    Borrower (double annualPercentageRateOfCharge, double monthlyPayment, int duration);
+
+    double getMonthlyPayment() const ;
+    double getAnnualPercentageRateOfCharge() const;
     int getAmountBorrowed() const;
     int getDuration() const;
     
-    void setMonthlyPayments(int monthlyPayment);
-    void setAnnualPercentageRateOfCharge(int annualPercentageRateOfCharge);
+    void setMonthlyPayments(double monthlyPayment);
+    void setAnnualPercentageRateOfCharge(double annualPercentageRateOfCharge);
     void setAmountBorrowed(int amountBorrowed);
     void setDuration(int duration);
+    
+    double calculateMonthlyPayments ();
+    double calculateBorrowingCapacity ();
 
 private:
     
-    int monthlyPayment;
-    int annualPercentageRateOfCharge;
+    double monthlyPayment;
+    double annualPercentageRateOfCharge;
     int amountBorrowed;
     int duration;
     

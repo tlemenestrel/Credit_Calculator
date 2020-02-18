@@ -9,33 +9,46 @@
 #include <iostream>
 
 #include "Borrower.hpp"
-#include "Calculations.hpp"
+#include "HandlingRequests.hpp"
 
 int main(int argc, const char * argv[]) {
-    
-    int duration;
-    double annualPercentageRateOfCharge,amountBorrowed;
 
     std::cout << "Well, hello there!\n\n";
     
-    std:: cout << "To start, please enter the duration of the loan in months: \n\n";
+    bool mainCondition = true;
     
-    std::cin >> duration;
+    while (mainCondition == true) {
     
-    std::cout << "Now, please enter how much you want to borrow: \n\n";
-    
-    std::cin >> amountBorrowed;
+        std::cout << "Enter m to calculate the monthly payments for a certain loan, b to calculate how much you can borrow or q to quit: \n\n";
 
-    std::cout << "Now, please enter the annual percentage rate of charge: \n\n";
+        char charCommandLine;
+        std::cin >> charCommandLine;
     
-    std::cin >> annualPercentageRateOfCharge;
+        if (charCommandLine == 'm') {
+            
+            HandlingRequests :: handlingMonthlyPayments();
+            
+        }
     
-    Borrower borrower (duration, annualPercentageRateOfCharge, amountBorrowed);
+        else if (charCommandLine == 'b') {
+            
+            HandlingRequests :: handlingBorrowingCapacity();
+            
+        }
     
-    double monthlyPayment = Calculations :: calculateMonthlyPayments(annualPercentageRateOfCharge,amountBorrowed,duration);
+        else if (charCommandLine == 'q') {
+            
+            std :: cout << "Quitting... \n\n";
+            mainCondition = false;
+            
+        }
     
-    std :: cout << "To borrow this amount of money, you will need to monthly pay:\n\n";
-    std :: cout << monthlyPayment << "€\n\n";
+        else {
+            
+            std::cout << "Wrong input - please try again... \n\n";
+            
+        }
+    }
 
     return 0;
 }
